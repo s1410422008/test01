@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="utf-8">
+        <title>- Chaos Code 歷史的軌跡 -</title>
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                var lang = (window.navigator.userLanguage || window.navigator.language || window.navigator.browserLanguage).toLowerCase();
+                var relang = lang.toLowerCase();
+                switch (relang) {
+                case "zh":
+                case "zh-tw":
+                case "zh-cn":
+                    window.location.replace("index_zh-TW.html");
+                    break;
+
+                case "ja":
+                case "ja-jp":
+                case "jp":
+                    window.location.replace("index_ja.html");
+                    break;
+                default:
+                    window.location.replace("index_en.html");
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="tbody"></div>
+    </body>
+</html>

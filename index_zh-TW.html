@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>- Chaos Code 歷史的軌跡 -</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Icon -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- myCSS -->
+        <link href="css/website.css" rel="stylesheet">
+        <!-- animate -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+        <!-- Owl Carousel CSS -->
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/owl.theme.default.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- 連結滾輪 -->
+        <script>
+            $(document).ready(function() {
+                //目標為所有導航謝列按鈕，點擊事件觸發時
+                $(".navbar a, footer a, .jumbotron a").on('click', function(event) {
+                    //將點擊按鈕的hash存起來
+                    var hash = this.hash;
+                    //使用animate方法移動卷軸到目標hash
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900);
+                });
+                //預設line的高
+                var downH = $("#down").offset().top;
+                var LineH = $("#NOW").offset().top;
+                $("#line").height(LineH - downH + "px");
+                var winTop = $(window).scrollTop();
+                $("#inline").height(winTop - downH / 2 + "px");
+                //預設顯示的物件
+                $(".slideanim").each(function() {
+                    var pos = $(this).offset().top;
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + downH / 2) {
+                        $(this).addClass("slide");
+                        $(this).removeClass("Dslide");
+                    }
+                    if ($(this).hasClass("slide") && pos > winTop + downH / 2) {
+                        $(this).addClass("Dslide");
+                        $(this).removeClass("slide");
+                    }
+                });
+                //設定文字的位置
+                $(".content, .content_R").each(function() {
+                    var cH = $(this).height();
+                    var sH = $(".iBar").height();
+                    $(this).css("padding-top", ((sH - cH) / 2 + 10) + "px");
+                });
+            });
+            //當視窗尺寸被改變時
+            $(window).resize(function() {
+                var downH = $("#down").offset().top;
+                var LineH = $("#NOW").offset().top;
+                $("#line").height(LineH - downH + "px");
+                var winTop = $(window).scrollTop();
+                $("#inline").height(winTop - downH / 2 + "px");
+                //預設顯示的物件
+                $(".slideanim").each(function() {
+                    var pos = $(this).offset().top;
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + downH / 2) {
+                        $(this).addClass("slide");
+                        $(this).removeClass("Dslide");
+                    }
+                    if ($(this).hasClass("slide") && pos > winTop + downH / 2) {
+                        $(this).addClass("Dslide");
+                        $(this).removeClass("slide");
+                    }
+                });
+                //設定文字的位置
+                $(".content, .content_R").each(function() {
+                    var cH = $(this).height();
+                    var sH = $(".iBar").height();
+                    $(this).css("padding-top", ((sH - cH) / 2 + 10) + "px");
+                });
+            });
+            //當視窗滾動時執行
+            $(window).scroll(function() {
+                $(".slideanim").each(function() {
+                    var pos = $(this).offset().top;
+                    var winTop = $(window).scrollTop();
+                    var downH = $("#down").offset().top;
+                    if (pos < winTop + 500 && pos > winTop + 350) {
+                        $(this).addClass("slide");
+                        $(this).removeClass("Dslide");
+                    }
+                    if ($(this).hasClass("slide") && pos > winTop + 750 && pos < winTop + 850) {
+                        $(this).addClass("Dslide");
+                        $(this).removeClass("slide");
+                    } else
+                        //偵測與增加時間軸白光
+                        $("#inline").height(winTop - downH / 2 + "px");
+                });
+            });
+        </script>
+    </head>
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <!-- 特效背景 -->
+        <div id="BG"></div>
+        <!-- 底圖特效 -->
+        <script type="text/javascript">
+            window.onload = function() {
+                var config = {
+                    vx: 4,
+                    //圓的x軸速度，正為右，負為左
+                    vy: 4,
+                    //圓的y軸速度
+                    height: 2,
+                    //圓的高寬，其實為正方形，不宜太大
+                    width: 2,
+                    count: 100,
+                    //點個數
+                    color: "121, 162, 185",
+                    //點顏色
+                    stroke: "100,200,180",
+                    //線顏色
+                    dist: 6000,
+                    //點吸附距離
+                    e_dist: 20000,
+                    //鼠標吸附加速距離
+                    max_conn: 10//點到點最大連接數
+                }
+                CanvasParticle(config);
+            }
+        </script>
+        <script type="text/javascript" src="js/canvas-particle.js"></script>
+        <!-- 回遊戲官網 -->
+        <a id="BH" href="http://www.fkdigital.net/chaoscode/">
+            <img src="./img/LOGO.png" alt="回遊戲官網" style="height:6vmin">
+        </a>
+        <!-- 語言切換 -->
+        <div id="LANG" class="dropdown">
+            <a class="dropdown-toggle" href="#" role="language" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons" style="font-size:6vmin">language</i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <a class="dropdown-item" role="中文" href="#">中文</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" role="日本語" href="#">日本語</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" role="English" href="#">English</a>
+                </li>
+            </div>
+        </div>
+        <!-- 首頁 -->
+        <div class="jumbotron container-fluid text-center" id="home">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <img class="col-xs-12 col-md-8 img-responsive dL" src="./img/LOGO3_T01.png" alt="活動紀錄首圖" style="margin-top:5vmin">
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <p class="col-xs-12 col-md-10" id="mTitle" data-text="MILESTONES">MILESTONES</p>
+                <div class="col-md-1"></div>
+            </div>
+            <a href="#milestones" title="To Start">
+                <div>
+                    <span class="glyphicon" id="down">&#xe259;</span>
+                    <span class="glyphicon" id="down" style="display: inherit;top: -1.88vmin">&#xe259;</span>
+                </div>
+            </a>
+        </div>
+        <!-- 時間軸 -->
+        <div class="container-fluid text-center" id="milestones">
+            <div id="lTime">
+                <p class="Ttxt">2009</p>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a id="BC09" href="#animatedModal09">
+                            <img class="PT" src="./img/S09.jpg">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Apr<br>24
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">《混沌代碼》第一次面市！</p>
+                        <div class="HR"></div>
+                        <p class="CTT">首次場測於日本「ソニックビーム松戸店」展開，在完全沒有任何宣傳與發表的情況下，透過SNS的傳播即受到各地格鬥遊戲玩家關注。</p>
+                    </div>
+                </div>
+                <p class="Ttxt">2010</p>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">《混沌代碼》於動漫聖地秋葉原CLUB SEGA第二次場測，同時正式發表</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R">製作人Mickey與Michael接受日本電玩媒體「4Gamer」的專訪。同月在台灣也登上「超級電玩瘋」的節目介紹。</p>
+                    </div>
+                    <div class="states_R">
+                        <a id="BC10" href="#animatedModal10">
+                            <img class="PT_R" src="./img/S10.jpg">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Jul<br>22
+                        </p>
+                    </div>
+                </div>
+                <p class="Ttxt">2011</p>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a id="BC11-01" href="#animatedModal11-01">
+                            <img class="PT" src="./img/S11-01.jpg">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Feb<br>18
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">《混沌代碼》參展日本「AOU2011電玩展」</p>
+                        <div class="HR"></div>
+                        <p class="CTT">展於SEGA業務機板RINGWIDE攤位。</p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">《混沌代碼》正式登場於全日本大型電玩店家</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R"></p>
+                    </div>
+                    <div class="states_R">
+                        <a href="http://www.fkdigital.net/chaoscoderw/" target="_blank">
+                            <img class="PT_R" src="./img/RM.png">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Aug<br>04
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a id="BC11-03" href="#animatedModal11-03">
+                            <img class="PT" src="./img/S11-02.png">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Nov<br>18
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">Ver1.01版登場，公開新角色「希莉亞II改」</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <p class="Ttxt">2012</p>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">《混沌代碼》遊戲原聲帶於日本發售</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R"></p>
+                    </div>
+                    <div class="states_R">
+                        <a href="http://www.team-e.co.jp/kdsd-00525/" target="_blank">
+                            <img class="PT_R" src="./img/S12-01.jpg">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Jan<br>25
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a id="BC12-01" href="#animatedModal12-01">
+                            <img class="PT" src="./img/S12-02.jpg">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Feb<br>02
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">《混沌代碼》宣佈移植PS®3，參展「台北電玩展2012」於索尼攤位</p>
+                        <div class="HR"></div>
+                        <p class="CTT">於同一會場與《快打旋風4》與《鐵拳系列》製作人們展開CAPCOM X BANDAI NAMCO X F K Digital製作人交流記者會。</p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">Ver1.02版登場，公開新角色「MG光」</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R"></p>
+                    </div>
+                    <div class="states_R">
+                        <a id="BC12-02" href="#animatedModal12-02">
+                            <img class="PT_R" src="./img/S12-03.jpg">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Jun<br>14
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a id="BC12-03" href="#animatedModal12-03">
+                            <img class="PT" src="./img/S12-04.jpg">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Sep<br>16
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">舉辦CHAOS CODE日本全國格鬥遊戲大會『C5』</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">下載專用遊戲《混沌代碼》PlayStation®3版亞洲區先行發售</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R">除了各種家用專用模式外，新增角色「古德拉克SIN」。同步發行了亞洲限定PSN點卡。</p>
+                    </div>
+                    <div class="states_R">
+                        <a id="BC12-04" href="#animatedModal12-04">
+                            <img class="PT_R" src="./img/S12-05.jpg">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Dec<br>19
+                        </p>
+                    </div>
+                </div>
+                <p class="Ttxt">2013</p>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a href="http://www.fkdigital.net/chaoscodeps3japan/" target="_blank">
+                            <img class="PT" src="./img/RM.png">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Apr<br>03
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">下載專用遊戲《混沌代碼》PlayStation®3日本版發售</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">逆移植加強版本《混沌代碼：新生浩劫》登陸日本大型機台NESiCA x live</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R"></p>
+                    </div>
+                    <div class="states_R">
+                        <a href="http://www.fkdigital.net/chaoscodenesica/" target="_blank">
+                            <img class="PT_R" src="./img/RM.png">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Jun<br>06
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a href="http://www.fkdigital.net/chaoscodeps3en/" target="_blank">
+                            <img class="PT" src="./img/RM.png">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Sep<br>03
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">下載專用遊戲《混沌代碼》PlayStation®3歐美版發售</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <p class="Ttxt">2014</p>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">成為美國『EVO 2014』世界大賽的附屬賽事項目！</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R"></p>
+                    </div>
+                    <div class="states_R">
+                        <a id="BC14-01" href="#animatedModal14-01">
+                            <img class="PT_R" src="./img/S14-01.png">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Jul<br>11
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a href="http://trftrf.com/ccrmc.html" target="_blank">
+                            <img class="PT" src="./img/S14-02.png">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Aug<br>04
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">舉辦格鬥遊戲比賽『CHAOSCODE RM Colosseum』</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">《混沌代碼：新生浩劫》Ver2.00版本登場</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R">新增角色「雷伊」與「露比娜斯」。</p>
+                    </div>
+                    <div class="states_R">
+                        <a id="BC14-03" href="#animatedModal14-03">
+                            <img class="PT_R" src="./img/S14-03.jpg">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Nov<br>27
+                        </p>
+                    </div>
+                </div>
+                <p class="Ttxt">2015</p>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a href="http://www.arcsystemworks.jp/arcstyle/radiohammer/" target="_blank">
+                            <img class="PT" src="./img/S15.jpg">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Apr<br>08
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">客串登場於3DS節奏音樂遊戲「Radio Hammer」</p>
+                        <div class="HR"></div>
+                        <p class="CTT">客串角色：「希莉亞」「希莉亞II改」「SG光」。</p>
+                    </div>
+                </div>
+                <p class="Ttxt">2016</p>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">《混沌代碼：新生浩劫》宣佈移植PlayStation®4</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R">參展「台北電玩展2016」於索尼攤位。</p>
+                    </div>
+                    <div class="states_R">
+                        <a id="BC16-01" href="#animatedModal16-01">
+                            <img class="PT_R" src="./img/S16-01.jpg">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Jan<br>27
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a href="https://www.toushinsai.com/history/2016-2/" target="_blank">
+                            <img class="PT" src="./img/S16-02.png">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Oct<br>15
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">入圍日本全國大賽『闘神祭2016』的主要比賽項目</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">PlayStation®4版《混沌代碼：新生浩劫》全球同步上架</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R">增加多種遊戲模式與原創性能角色，對應全國網路對戰。</p>
+                    </div>
+                    <div class="states_R">
+                        <a href="http://www.fkdigital.net/chaoscodeps4/" target="_blank">
+                            <img class="PT_R" src="./img/S16-03.jpg">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Nov<br>09
+                        </p>
+                    </div>
+                </div>
+                <p class="Ttxt">2017</p>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a href="http://www.fkdigital.net/chaoscode_steam/jp.html" target="_blank">
+                            <img class="PT" src="./img/S17-01.jpg">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Mar<br>16
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">PC STEAM版《混沌代碼：新生浩劫》發售</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">入圍日本格鬥遊戲大會『KVO x TSB』主要比賽項目</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R"></p>
+                    </div>
+                    <div class="states_R">
+                        <a href="http://kvo2k.com/2017/" target="_blank">
+                            <img class="PT_R" src="./img/S17-02.png">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            May<br>04
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a id="BC17-03" href="#animatedModal17-03">
+                            <img class="PT" src="./img/S17-03.png">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Jul<br>14
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">入圍美國『EVO 2017』『ANIME EVO』格鬥遊戲大賽主要比賽項目</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">參加台灣2017『Digital Taipei』格鬥遊戲大賽</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R"></p>
+                    </div>
+                    <div class="states_R">
+                        <a href="https://www.dgtaipei.tw/events_2.php" target="_blank">
+                            <img class="PT_R" src="./img/S17-04.png">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Sep<br>12
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a href="https://www.toushinsai.com/history/2017-2/" target="_blank">
+                            <img class="PT" src="./img/S17-05.png">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Oct<br>21
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">入圍日本『闘神祭』2017格鬥遊戲大賽主要比賽項目</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <p class="Ttxt">2018</p>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">舉辦官方日本格鬥遊戲大賽『EVO 2018 FKDcup』</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R"></p>
+                    </div>
+                    <div class="states_R">
+                        <a href="http://www.fkdigital.net/chaoscode2018evo/" target="_blank">
+                            <img class="PT_R" src="./img/S18-01.png">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            Jan<br>27
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a href="http://kvo2k.com/" target="_blank">
+                            <img class="PT" src="./img/S17-02.png">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            May<br>04
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">入圍日本格鬥遊戲大會『KVO x TSB』2018主要比賽項目</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="content_R">
+                        <p class="CT_R">入圍格鬥遊戲比賽『COMBO BREAKER』</p>
+                        <div class="HR_R"></div>
+                        <p class="CTT_R"></p>
+                    </div>
+                    <div class="states_R">
+                        <a href="https://combobreaker.org/2018-side-tournaments/" target="_blank">
+                            <img class="PT_R" src="./img/S18-03.png">
+                        </a>
+                        <img class="PTBG_R" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD_R">
+                            May<br>25
+                        </p>
+                    </div>
+                </div>
+                <div class="iBar slideanim">
+                    <div class="states">
+                        <a id="BC18-04" href="#animatedModal18-04">
+                            <img class="PT" src="./img/S18-04.png">
+                        </a>
+                        <img class="PTBG" src="./img/PTBG.png">
+                        <hr>
+                        <p class="MMDD">
+                            Jun<br>17
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p class="CT">入圍『Red Bull Gaming Sphere Tokyo』比賽項目之一</p>
+                        <div class="HR"></div>
+                        <p class="CTT"></p>
+                    </div>
+                </div>
+                <p id="NOW" class="Ttxt">NOW</p>
+                <br>
+            </div>
+            <div id="line">
+                <span id="inline"></span>
+            </div>
+        </div>
+        <div id="animatedModal09">
+            <div id="closebt-container" class="close-animatedModal09">
+                <img class="closebt center-block" src="img/X.png">
+            </div>
+            <img class="img-responsive CV" src="./img/S09.jpg">
+        </div>
+</div>
+<!-- 點擊展開之內頁 -->
+<div id="animatedModal10">
+    <div id="closebt-container" class="close-animatedModal10">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive CV" src="./img/100722-0.png">
+</div>
+<div id="animatedModal11-01">
+    <div id="closebt-container" class="close-animatedModal11-01">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive CV" src="./img/S11-01.jpg">
+</div>
+<div id="animatedModal11-03">
+    <div id="closebt-container" class="close-animatedModal11-03">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive CV" src="./img/S11-02.png">
+</div>
+<div id="animatedModal12-01">
+    <div id="closebt-container" class="close-animatedModal12-01">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive CV" src="./img/S12-02.jpg">
+</div>
+<div id="animatedModal12-02">
+    <div id="closebt-container" class="close-animatedModal12-02">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive CV" src="./img/S12-03.jpg">
+</div>
+<div id="animatedModal12-03">
+    <div id="closebt-container" class="close-animatedModal12-03">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive A_LOGO" src="./img/S12-04.jpg">
+    <p class="A_Tittle">CHAOS CODE全國大會-【C5】</p>
+    <p class="A_Tittle_P">(CHAOS CODE CRAZY CHAOTIC CARNIVAL)</p>
+    <p class="A_PP">
+        日期：2012年9月16日
+    <br>
+        地點：大阪的高槻市遊戲中心「リブロス高槻店」
+    <br>主辦：中野TRF・メディアパーク リブロス高槻店
+    </p>
+    <br>
+    <br>
+    <p class="A_Red">
+        ＊以下圖文資料來源取自<a href="http://kakuge.info/archives/17616" target="_blank">【格闘ゲーム総合サイト FFL ～Fighters Front Line】</a>
+        報導
+    </p>
+    <p class="A_Text">
+        2012年9月16日，大阪的高槻市遊戲中心<strong>「リブロス高槻店」</strong>
+        ，舉辦了歷史性的全日本多數店家合辦的日本全國大賽－C5，在7月日本各地店家合同舉辦了預賽後，決賽當天玩家的熱情將整間店家給塞滿了。<br>誰將贏得這場比賽呢？
+    </p>
+    <br>
+    <div class="owl-carousel owl-theme">
+        <div class="item">
+            <p class="A_YL">▼店鋪照片</p>
+            <img class="img-responsive A_PT" src="./img/C5_01.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼活動當天店照</p>
+            <img class="img-responsive A_PT" src="./img/C5_03.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼穿著CHAOS CODE角色痛衣的玩家</p>
+            <img class="img-responsive A_PT" src="./img/C5_02.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼參與的玩家們</p>
+            <img class="img-responsive A_PT" src="./img/C5_12.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼比賽結果</p>
+            <table class="table">
+                <thead>
+                    <tr class="info">
+                        <th>名次</th>
+                        <th>獲獎者</th>
+                        <th>使用角色</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning">
+                        <td>冠軍</td>
+                        <td>ピチカート</td>
+                        <td>セリアⅡ改 (希莉亞Ⅱ改)</td>
+                    </tr>
+                    <tr class="info">
+                        <td>亞軍</td>
+                        <td>ゆあ</td>
+                        <td>美島ルイ (美島露伊)</td>
+                    </tr>
+                    <tr class="warning">
+                        <td>季軍</td>
+                        <td>モミアゲ</td>
+                        <td>MGヒカル (MG光)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="item">
+            <p class="A_YL">▼優勝者們與色紙合照</p>
+            <img class="img-responsive A_PT" src="./img/C5_25.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼大合照，活動順利落幕！ </p>
+            <img class="img-responsive A_PT" src="./img/C5_50.jpg">
+        </div>
+    </div>
+</div>
+<div id="animatedModal12-04">
+    <div id="closebt-container" class="close-animatedModal12-04">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive CV" src="./img/S12-05.jpg">
+</div>
+<div id="animatedModal14-01">
+    <div id="closebt-container" class="close-animatedModal14-01">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive A_LOGO" src="./img/S14-01.png">
+    <p class="A_Tittle">2014 Evolution Championship Series</p>
+    <p class="A_Tittle_P"></p>
+    <p class="A_PP">
+        日期：2014年7月11日~13日
+    <br>
+        地點：Westgate Las Vegas Resort &Casino<br>主辦：Triple Perfect Inc.
+    </p>
+    <br>
+    <br>
+    <p class="A_Red">
+        ＊以下影片均轉載自Youtube－<a href="https://www.youtube.com/watch?v=CPwxvETnvlw&index=1&list=PLY11-UgwQjiIwsIxnxp89CgJFUmwGU-4V" target="_blank">Numakie</a>
+        影片原址皆註明在資訊內
+    </p>
+    <p class="A_Text">2014年7月11日~13日，於Westgate Las Vegas Resort &Casino 舉辦了世界級格鬥大賽－2014 Evolution Championship Series。Chaos code榮幸的成為這次活動的附屬賽事項目，並於7/11舉行比賽
+    </p>
+    <br>
+    <div class="owl-carousel owl-theme">
+        <div class="item">
+            <p class="A_YL">▼比賽結果</p>
+            <table class="table">
+                <thead>
+                    <tr class="info">
+                        <th>名次</th>
+                        <th>獲獎者</th>
+                        <th>使用角色</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning">
+                        <td>冠軍</td>
+                        <td>Abegen</td>
+                        <td>BRAVO (布拉伯)</td>
+                    </tr>
+                    <tr class="info">
+                        <td>亞軍</td>
+                        <td>H-F Blade</td>
+                        <td>CERBERUS (賽伯拉斯)</td>
+                    </tr>
+                    <tr class="warning">
+                        <td>季軍</td>
+                        <td>Dblank</td>
+                        <td>MG HIKARU (MG光)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="item-video">
+            <p class="A_YL">▼競賽對戰影片</p>
+            <a class="owl-video" href="https://youtu.be/OpTnIb3WodE"></a>
+        </div>
+        <div class="item-video">
+            <p class="A_YL">▼競賽對戰影片</p>
+            <a class="owl-video" href="https://youtu.be/u4rzkcjxQdE"></a>
+        </div>
+        <div class="item-video">
+            <p class="A_YL">▼競賽對戰影片</p>
+            <a class="owl-video" href="https://youtu.be/gTBEVKyUaWk"></a>
+        </div>
+        <div class="item-video">
+            <p class="A_YL">▼競賽對戰影片</p>
+            <a class="owl-video" href="https://youtu.be/o9L3y6HbDTo"></a>
+        </div>
+        <div class="item-video">
+            <p class="A_YL">▼競賽對戰影片</p>
+            <a class="owl-video" href="https://youtu.be/APGaKgdxEEM"></a>
+        </div>
+    </div>
+</div>
+<div id="animatedModal14-03">
+    <div id="closebt-container" class="close-animatedModal14-03">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive CV" src="./img/S14-03.jpg">
+</div>
+<div id="animatedModal16-01">
+    <div id="closebt-container" class="close-animatedModal16-01">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive CV" src="./img/S16-01.jpg">
+</div>
+<div id="animatedModal17-03">
+    <div id="closebt-container" class="close-animatedModal17-03">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive A_LOGO" src="./img/S17-03.png">
+    <p class="A_Tittle">AnimEVO2017</p>
+    <p class="A_Tittle_P"></p>
+    <p class="A_PP">
+        日期：2017年7月14日~16日
+    <br>
+        地點：Mandalay Bay<br>主辦：Triple Perfect Inc.
+    </p>
+    <br>
+    <br>
+    <p class="A_Red">
+        ＊以下影片均轉載自Youtube－<a href="https://www.youtube.com/channel/UCBflI7SHCrGzLtFAhOIMDQg" target="_blank">Numakie</a>
+        影片原址皆註明在資訊內<br>
+        ＊圖片截自<a href="https://smash.gg/tournament/animevo-2017/events/chaos-code-new-sign-of-catastrophe/brackets?filter={%22phaseId%22%3A134888}" target="_blank">smash.gg</a>
+    </p>
+    <p class="A_Text">2017年7月14~16日，於Mandalay Bay舉辦了世界級格鬥大賽－AnimEVO 2017 Chaos code榮幸的成為這次活動的主比賽項目，並於7/14舉行比賽！
+    </p>
+    <br>
+    <div class="owl-carousel owl-theme">
+        <div class="item">
+            <p class="A_YL">▼比賽結果</p>
+            <table class="table">
+                <thead>
+                    <tr class="info">
+                        <th>名次</th>
+                        <th>獲獎者</th>
+                        <th>使用角色</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning">
+                        <td>冠軍</td>
+                        <td>ABEGEN</td>
+                        <td>ブラボー (布拉伯)</td>
+                    </tr>
+                    <tr class="info">
+                        <td>亞軍</td>
+                        <td>Hitbox|TrophyClub</td>
+                        <td>ルピナス (露比娜斯)</td>
+                    </tr>
+                    <tr class="warning">
+                        <td>季軍</td>
+                        <td>GRITSDerrick</td>
+                        <td>篝 (篝)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="item">
+            <p class="A_YL">▼賽程表</p>
+            <img class="img-responsive A_PT" src="./img/E7_01.jpg">
+        </div>
+        <div class="item-video">
+            <p class="A_YL">▼競賽對戰影片</p>
+            <a class="owl-video" href="https://youtu.be/akx2Xs5jnJ4"></a>
+        </div>
+        <div class="item-video">
+            <p class="A_YL">▼競賽對戰影片</p>
+            <a class="owl-video" href="https://youtu.be/17LSGwip1r0"></a>
+        </div>
+    </div>
+</div>
+<div id="animatedModal18-04">
+    <div id="closebt-container" class="close-animatedModal18-04">
+        <img class="closebt center-block" src="img/X.png">
+    </div>
+    <img class="img-responsive A_LOGO" src="./img/S18-04.png">
+    <p class="A_Tittle">カオスコード対戦会</p>
+    <p class="A_Tittle_P">Red Bull Gaming Sphere Tokyo</p>
+    <p class="A_PP">
+        日期：2018年6月17日
+    <br>
+        地點：東京都中野区中野3丁目33-18
+    <br>主辦：はしも(@hashimoAl)
+    </p>
+    <br>
+    <br>
+    <p class="A_Text"></p>
+    <br>
+    <div class="owl-carousel owl-theme">
+        <div class="item">
+            <p class="A_YL">▼會場照片</p>
+            <img class="img-responsive A_PT" src="./img/RB_01.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼對戰中的選手</p>
+            <img class="img-responsive A_PT" src="./img/RB_02.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼參賽的選手</p>
+            <img class="img-responsive A_PT" src="./img/RB_03.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼觀戰的玩家們</p>
+            <img class="img-responsive A_PT" src="./img/RB_04.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼對戰區</p>
+            <img class="img-responsive A_PT" src="./img/RB_05.jpg">
+        </div>
+        <div class="item">
+            <p class="A_YL">▼對戰會場接待處</p>
+            <img class="img-responsive A_PT" src="./img/RB_06.jpg">
+        </div>
+    </div>
+</div>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- animate -->
+<script type="text/javascript" src="js/animatedModal.min.js"></script>
+<!-- 圖片點擊連接設定 -->
+<script>
+    $("#BC09").animatedModal({
+        modalTarget: 'animatedModal09',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC10").animatedModal({
+        modalTarget: 'animatedModal10',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC11-01").animatedModal({
+        modalTarget: 'animatedModal11-01',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC11-03").animatedModal({
+        modalTarget: 'animatedModal11-03',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC12-01").animatedModal({
+        modalTarget: 'animatedModal12-01',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC12-02").animatedModal({
+        modalTarget: 'animatedModal12-02',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC12-03").animatedModal({
+        modalTarget: 'animatedModal12-03',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC12-04").animatedModal({
+        modalTarget: 'animatedModal12-04',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC14-01").animatedModal({
+        modalTarget: 'animatedModal14-01',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC14-03").animatedModal({
+        modalTarget: 'animatedModal14-03',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC16-01").animatedModal({
+        modalTarget: 'animatedModal16-01',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC17-03").animatedModal({
+        modalTarget: 'animatedModal17-03',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+    $("#BC18-04").animatedModal({
+        modalTarget: 'animatedModal18-04',
+        animatedIn: 'zoomIn',
+        animatedOut: 'bounceOut'
+    });
+</script>
+<!-- Owl Carousel JS -->
+<script src="js/owl.carousel.min.js"></script>
+<script>
+    $('.owl-carousel').owlCarousel({
+        items: 1,
+        margin: 10,
+        loop: true,
+        autoHeight: true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        video: true,
+        videoHeight: false,
+        videoWidth: false
+    });
+</script>
+<!-- 頁尾 -->
+<footer class="text-center">
+    <a href="#home" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <br>
+    <a href="http://www.fkdigital.net/fkd_site2016/jp_fkdigital_index.html" target="_blank">
+        <img src="./img/fkdlogo.png">
+    </a>
+    <a href="http://www.arcsystemworks.jp/" target="_blank">
+        <img src="./img/arclogo.png">
+    </a>
+    <br>
+    <p style="font-size: 1.475vmin;position: relative;">Copyright © 2018 F K Digital. All rights reserved.</p>
+</footer>
+</body></html>
